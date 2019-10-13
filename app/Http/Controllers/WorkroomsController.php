@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class WorkroomController extends Controller
+class WorkroomsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,8 @@ class WorkroomController extends Controller
      */
     public function index()
     {
-        //
+        $workrooms = Workroom::all();
+        return view('workrooms');
     }
 
     /**

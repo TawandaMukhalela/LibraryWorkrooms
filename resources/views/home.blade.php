@@ -27,7 +27,7 @@
           <li class="list-group-item">No more "stolen" rooms, disrupted study or empty rooms due to no-shows</li>
           <li class="list-group-item">Easy and Fast</li>
         </ul>
-        <a href="#" class="btn btn-rose">Book a Workroom</a>
+        <a href="/workrooms" class="btn btn-rose">Book a Workroom</a>
       </div>
       <div class="card-footer">
       </div>
