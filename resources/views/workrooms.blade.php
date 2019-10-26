@@ -2,71 +2,92 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-3">
-            <div class="nav flex-column nav-tabs" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Workrooms</a>
-                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">My Bookings</a>
-                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Manage Bookings</a>
-                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-            </div>
-        </div>
-        <div class="col-9">
-            <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                <hr class="hr-primary" />
-                <h3 class="">All Avialable Rooms : University of Venda</h3>
-                <hr class="hr-primary" />
-                <div class="card-deck">
-                    @php
-                        $items = array(1,2,3,4,5);
-                        $count = 0;
-                    @endphp
-                    @foreach ($items as $item)
-                        @php
-                        if ($count === 0){
-                            echo '<div class="row">';
-                            $count = $count + 1;
-                        }
-                        if ($count<=3) {
-                           echo '
-                                <div class="card">
-                                    <img src="" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">Last updated 3 mins ago</small>
-                                    </div>
-                                </div>';
-                        }else {
-                            $count = 0;
-                            echo '</div>';
-                        }
-
-                        @endphp
-                    @endforeach
-
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+            <div class="card-header card-header-tabs card-header-rose">
+                <div class="nav-tabs-navigation">
+                <div class="nav-tabs-wrapper">
+                    <span class="nav-tabs-title"> </span>
+                    <ul class="nav nav-tabs" data-tabs="tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#workrooms" data-toggle="tab">
+                        <i class="material-icons">home</i> Workrooms
+                        <div class="ripple-container"></div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#bookings" data-toggle="tab">
+                        <i class="material-icons">code</i> My Bookings
+                        <div class="ripple-container"></div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#allbookings" data-toggle="tab">
+                        <i class="material-icons">cloud</i> Server
+                        <div class="ripple-container"></div>
+                        </a>
+                    </li>
+                    </ul>
+                </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                <hr class="hr-primary" />
-                <h3 class="">All Bookings : University of Venda</h3>
-                <hr class="hr-primary" />
-            </div>
-            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                <hr class="hr-primary" />
-                <h3 class="">Manage Your Bookings : University of Venda</h3>
-                <hr class="hr-primary" />
-            </div>
-            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                <hr class="hr-primary" />
-                <h3 class=""> : University of Venda</h3>
-                <hr class="hr-primary" />
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active table-responsive" id="workrooms">
+                        <table class="table table-hover">
+                            <thead class="text-rose text-center">
+                                <th>Room Number</th>
+                                <th>Category</th>
+                                <th>RoomLocation</th>
+                                <th >Capacity</th>
+                                <th>Room Availability</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+
+                                @foreach ($workrooms as $workroom)
+                                    <tr>
+                                        <td>{{ $workroom->room_no }}</td>
+                                        <td class="text-center">{{ $workroom->category }}</td>
+                                        <td>{{ $workroom->address }}</td>
+                                        <td class="text-center">{{ $workroom->capacity }}</td>
+                                        <td class="text-center">
+                                        @if ($workroom->is_available == 1)
+                                            {{ 'Available' }}
+                                        @else
+                                            {{ 'Un-Available' }}
+                                        @endif
+                                        </td>
+                                        <td>
+                                        @if ($workroom->is_available == 1)
+                                            <a href="/workroom/book" class="btn btn-raised btn-outline-info">Reserve Room</a>
+                                        @endif
+                                            <a href="/workroom/book" class="btn btn-raised btn-outline-danger">View Slots</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                            <tfoot class="text-center">
+                                <th>Room Number</th>
+                                <th>Room Category</th>
+                                <th>Room Location</th>
+                                <th >Capacity</th>
+                                <th>Room Availability</th>
+                                <th></th>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="tab-pane active" id="bookings">
+
+                    </div>
+                    <div class="tab-pane active" id="allbookings">
+
+                    </div>
+                </div>
             </div>
             </div>
         </div>
-    </div>
 </div>
 
 @endsection
