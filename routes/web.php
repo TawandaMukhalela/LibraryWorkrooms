@@ -15,15 +15,12 @@
     return view('welcome');
 });*/
 
+use App\Http\Controllers\WorkroomController;
+use App\Workroom;
+
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/workrooms', 'WorkroomController@index');
-Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
-Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm');
-
-Route::post('/login/admin', 'Auth\LoginController@adminLogin');
-Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
-
+Route::get('/workrooms/book/{id}', 'WorkroomController@show');
 Route::view('/home', 'home')->middleware('auth');
-Route::view('/admin', 'admin')->middleware('auth');

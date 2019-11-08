@@ -14,7 +14,7 @@ class CreateWorkroomsTable extends Migration
     public function up()
     {
         Schema::create('workrooms', function (Blueprint $table) {
-            $table->bigIncrements('room_no');
+            $table->bigIncrements('id');
             $table->string('category');
             $table->text('address');
             $table->integer('capacity');

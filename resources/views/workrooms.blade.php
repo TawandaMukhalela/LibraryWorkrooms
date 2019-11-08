@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -47,9 +48,9 @@
 
                                 @foreach ($workrooms as $workroom)
                                     <tr>
-                                        <td>{{ $workroom->room_no }}</td>
+                                        <td>{{ $workroom->id }}</td>
                                         <td class="text-center">{{ $workroom->category }}</td>
-                                        <td>{{ $workroom->address }}</td>
+                                        <td>{!! $workroom->address !!}</td>
                                         <td class="text-center">{{ $workroom->capacity }}</td>
                                         <td class="text-center">
                                         @if ($workroom->is_available == 1)
@@ -60,9 +61,9 @@
                                         </td>
                                         <td>
                                         @if ($workroom->is_available == 1)
-                                            <a href="/workroom/book" class="btn btn-raised btn-outline-info">Reserve Room</a>
+                                        <a href="/workrooms/book/{{ $workroom->id }}" class="btn btn-raised btn-outline-info">Reserve Room</a>
                                         @endif
-                                            <a href="/workroom/book" class="btn btn-raised btn-outline-danger">View Slots</a>
+                                            <a data-whatever="{{ $workroom->id }}" class="btn btn-raised btn-outline-danger" data-toggle="modal" data-target="#slots_modal">View Slots</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -88,6 +89,26 @@
             </div>
             </div>
         </div>
+</div>
+
+<div class="modal fade" id="slots_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 @endsection

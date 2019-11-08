@@ -47,9 +47,12 @@ class WorkroomController extends Controller
      * @param  \App\Workroom  $workroom
      * @return \Illuminate\Http\Response
      */
-    public function show(Workroom $workroom)
+    public function show($id)
     {
-        //
+        $workroom = Workroom::find($id);
+        return view('bookings', [
+            'workroom' => $workroom,
+        ]);
     }
 
     /**
