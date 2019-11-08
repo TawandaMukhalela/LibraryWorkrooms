@@ -58,6 +58,8 @@
                     </div>
                 </div>
                 <div class="card-footer">
+                <form class="was-validated" method="POST" action="/booking/create/{{ $workroom->id }}" >
+                    @csrf
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="card card-stats">
@@ -69,51 +71,48 @@
                                 <h3 class="card-title">Booking  information</h3>
                             </div>
                             <div class="card-body">
-                                <form class="was-validated">
+
                                     <div class="mb-3">
-                                        <label for="validationTextarea">Textarea</label>
-                                        <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+                                        <label for="validationTextarea">Booking Reason</label>
+                                        <textarea class="form-control is-invalid" name="time_slot" id="validationTextarea" placeholder="Required reason for this booking" required></textarea>
                                         <div class="invalid-feedback">
-                                        Please enter a message in the textarea.
+                                        Please enter a reason for this booking
                                         </div>
                                     </div>
 
                                     <div class="custom-control custom-switch mb-3">
-                                        <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
-                                        <label class="custom-control-label" for="customControlValidation1">Check this custom checkbox</label>
-                                        <div class="invalid-feedback">Example invalid feedback text</div>
-                                    </div>
-
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
-                                        <label class="custom-control-label" for="customControlValidation2">Toggle this custom radio</label>
-                                    </div>
-                                    <div class="custom-control custom-radio mb-3">
-                                        <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
-                                        <label class="custom-control-label" for="customControlValidation3">Or toggle this other custom radio</label>
-                                        <div class="invalid-feedback">More example invalid feedback text</div>
+                                        <input type="checkbox" class="custom-control-input" id="customControlValidation1" name="terms" required>
+                                        <label class="custom-control-label" for="customControlValidation1">Terms and Conditions Aggreement</label>
+                                        <div class="invalid-feedback">Please agree our terms and conditions</div>
+                                        <div class="invalid-feedback">1. You shall not make noise in our facilities. </div>
+                                        <div class="invalid-feedback">2. All cell phones shall be switched off at all times.</div>
+                                        <div class="invalid-feedback">3. All booking cancellations shall be done 30 minutes prior to approved booking time </div>
+                                        <div class="invalid-feedback">4. Should a cancellation be made within the 30 minute window, a penalty fee may apply.</div>
                                     </div>
 
                                     <div class="form-group">
-                                        <select class="custom-select" required>
-                                        <option value="">Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                        </select>
+                                        <div class='input-group date' id='datetimepicker1'>
+                                            <input type='text' class="form-control" name="date" required/>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
                                         <div class="invalid-feedback">Example invalid custom select feedback</div>
                                     </div>
 
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                                        <input type="file" class="custom-file-input" id="validatedCustomFile" name="custom" required>
                                         <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                         <div class="invalid-feedback">Example invalid custom file feedback</div>
                                     </div>
-                                    </form>
+
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
-                                    <i class="material-icons">local_offer</i> Tracked from Github
+                                    <i class="material-icons">local_offer</i>
+                                    <div class="">
+                                        <button type="submit" class="btn btn-group-raised btn-rose"> Book Room</button>
+                                        <button type="reset" class="btn btn-group-raised btn-rose"> Clear Form</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -138,10 +137,59 @@
                         </div>
                     </div>
                 </div>
+                </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+ $(function () {
+   var bindDatePicker = function() {
+		$(".date").datetimepicker({
+        format:'YYYY-MM-DD',
+			icons: {
+				time: "fa fa-clock-o",
+				date: "fa fa-calendar",
+				up: "fa fa-arrow-up",
+				down: "fa fa-arrow-down"
+			}
+		}).find('input:first').on("blur",function () {
+			// check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
+			// update the format if it's yyyy-mm-dd
+			var date = parseDate($(this).val());
+
+			if (! isValidDate(date)) {
+				//create date based on momentjs (we have that)
+				date = moment().format('YYYY-MM-DD');
+			}
+
+			$(this).val(date);
+		});
+	}
+
+   var isValidDate = function(value, format) {
+		format = format || false;
+		// lets parse the date to the best of our knowledge
+		if (format) {
+			value = parseDate(value);
+		}
+
+		var timestamp = Date.parse(value);
+
+		return isNaN(timestamp) == false;
+   }
+
+   var parseDate = function(value) {
+		var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
+		if (m)
+			value = m[5] + '-' + ("00" + m[3]).slice(-2) + '-' + ("00" + m[1]).slice(-2);
+
+		return value;
+   }
+
+   bindDatePicker();
+ });
+</script>
 @endsection
 

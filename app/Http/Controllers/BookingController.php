@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class BookingController extends Controller
 {
@@ -14,7 +16,7 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        $booking = Booking::all();
     }
 
     /**
@@ -22,9 +24,18 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $data, $id)
     {
-        //
+        $booking = Booking::create([
+            'user' => Auth::user()->id,
+            'time_slot' => $data['time_slot'],
+            'room_no' => $id,
+            'date' => $data['date'],
+            'user_id' => Auth::user()->id,
+        ]);
+        return view('booking', [
+            'booking' => $booking
+            ]);
     }
 
     /**

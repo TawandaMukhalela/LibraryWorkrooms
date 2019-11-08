@@ -23,4 +23,5 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/workrooms', 'WorkroomController@index');
 Route::get('/workrooms/book/{id}', 'WorkroomController@show');
+Route::post('/booking/create/{id}', 'BookingController@create');
 Route::view('/home', 'home')->middleware('auth');
