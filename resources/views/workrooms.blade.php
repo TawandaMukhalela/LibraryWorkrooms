@@ -79,8 +79,37 @@
                             </tfoot>
                         </table>
                     </div>
-                    <div class="tab-pane active" id="bookings">
+                    <div class="tab-pane table-responsive" id="bookings">
+                        <table class="table table-hover">
+                            <thead class="text-rose text-center">
+                                <th>Booking Reference</th>
+                                <th>Name</th>
+                                <th>Room Numner</th>
+                                <th >Capacity</th>
+                                <th>Time Slot</th>
+                            </thead>
+                            <tbody>
 
+                                @foreach ($bookings as $booking)
+                                    <tr class="text-center">
+                                        <td>{{ $booking->id }}</td>
+                                        <td>{{ Auth::user()->name }}</td>
+                                        <td>{!! $booking->room_no !!}</td>
+                                        <td>{{ App\Workroom::find($booking->room_no)->capacity }}</td>
+                                        <td>{{ $booking->time_slot }}</td>
+
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                            <tfoot class="text-center">
+                                <th>Booking Reference</th>
+                                <th>Name</th>
+                                <th>Room Numner</th>
+                                <th >Capacity</th>
+                                <th>Time Slot</th>
+                            </tfoot>
+                        </table>
                     </div>
                     <div class="tab-pane active" id="allbookings">
 

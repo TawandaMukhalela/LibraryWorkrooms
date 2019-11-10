@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Booking;
 use App\Workroom;
 use Illuminate\Http\Request;
+use Auth;
 
 class WorkroomController extends Controller
 {
@@ -14,9 +16,13 @@ class WorkroomController extends Controller
      */
     public function index()
     {
+        $user = Auth::user()->id;
+
+        $bookings = Booking::where('user_id', $user)->get();
         $workrooms = Workroom::all();
         return view('workrooms', [
             'workrooms' => $workrooms,
+            'bookings' => $bookings
         ]);
     }
 
@@ -27,7 +33,7 @@ class WorkroomController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -38,7 +44,7 @@ class WorkroomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

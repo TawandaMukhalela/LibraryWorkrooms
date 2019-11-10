@@ -23,8 +23,7 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="css/reservation.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+    <link href="/css/reservation.css" rel="stylesheet" />
 </head>
 <body>
     <div id="app">
@@ -84,28 +83,27 @@
         </main>
     </div>
 <!--   Core JS Files   -->
-  {{-- {{-- <script src="js/core/jquery.min.js"></script>
-  <script src="js/core/popper.min.js"></script>
-  <script src="js/core/bootstrap-material-design.min.js"></script>
-  <script src="js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <script src="js/plugins/moment.min.js"></script>
-  <script src="js/plugins/sweetalert2.js"></script>
-  <script src="js/plugins/jquery.validate.min.js"></script>
-  <script src="js/plugins/jquery.bootstrap-wizard.js"></script>
-  <script src="js/plugins/bootstrap-selectpicker.js"></script>
-  <script src="js/plugins/bootstrap-datetimepicker.min.js"></script>
-  <script src="js/plugins/jquery.dataTables.min.js"></script>
-  <script src="js/plugins/bootstrap-tagsinput.js"></script>
-  <script src="js/plugins/jasny-bootstrap.min.js"></script>
-  <script src="js/plugins/fullcalendar.min.js"></script>
-  <script src="js/plugins/jquery-jvectormap.js"></script>
-  <script src="js/plugins/nouislider.min.js"></script>
+  <script src="/js/core/jquery.min.js"></script>
+  <script src="/js/core/popper.min.js"></script>
+  <script src="/js/core/bootstrap-material-design.min.js"></script>
+  <script src="/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="/js/plugins/moment.min.js"></script>
+  <script src="/js/plugins/sweetalert2.js"></script>
+  <script src="/js/plugins/jquery.validate.min.js"></script>
+  <script src="/js/plugins/jquery.bootstrap-wizard.js"></script>
+  <script src="/js/plugins/bootstrap-selectpicker.js"></script>
+  <script src="/js/plugins/bootstrap-datetimepicker.min.js"></script>
+  <script src="/js/plugins/jquery.dataTables.min.js"></script>
+  <script src="/js/plugins/bootstrap-tagsinput.js"></script>
+  <script src="/js/plugins/jasny-bootstrap.min.js"></script>
+  <script src="/js/plugins/fullcalendar.min.js"></script>
+  <script src="/js/plugins/jquery-jvectormap.js"></script>
+  <script src="/js/plugins/nouislider.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-  <script src="js/plugins/arrive.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <script src="js/plugins/chartist.min.js"></script>
-  <script src="js/plugins/bootstrap-notify.js"></script>
-  <script src="js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
+  <script src="/js/plugins/arrive.min.js"></script>
+  <script src="/js/plugins/chartist.min.js"></script>
+  <script src="/js/plugins/bootstrap-notify.js"></script>
+  <script src="/js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
   <script>
     $(document).ready(function() {
       $().ready(function() {
@@ -129,6 +127,7 @@
         }
 
         $('.fixed-plugin a').click(function(event) {
+          // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
           if ($(this).hasClass('switch-trigger')) {
             if (event.stopPropagation) {
               event.stopPropagation();
@@ -262,10 +261,12 @@
             }, 300);
           }
 
+          // we simulate the window Resize so the charts will get updated in realtime.
           var simulateWindowResize = setInterval(function() {
             window.dispatchEvent(new Event('resize'));
           }, 180);
 
+          // we stop the simulation of Window Resize after the animations are completed
           setTimeout(function() {
             clearInterval(simulateWindowResize);
           }, 1000);
@@ -276,10 +277,10 @@
   </script>
   <script>
     $(document).ready(function() {
-      md.initDashboardPageCharts();
-
+      //init DateTimePickers
+      md.initFormExtendedDatetimepickers();
     });
-  </script> --}}
+  </script>
 </body>
 
 </html>
